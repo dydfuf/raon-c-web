@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "@/styles/globals.css";
 import "@/styles/prosemirror.css";
+
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import CommonLayout from "@/components/layout/CommonLayout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,11 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning className="size-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative flex flex-col`}
       >
-        {children}
+        <CommonLayout>{children}</CommonLayout>
       </body>
     </html>
   );
