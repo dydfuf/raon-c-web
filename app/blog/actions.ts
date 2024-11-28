@@ -15,13 +15,44 @@ export async function getPosts() {
   return data;
 }
 
-export async function getPost(slug: string) {
+export async function getPostBySlug(slug: string) {
   const supabase = await createClient();
 
   const { data, error } = await supabase
     .from("post")
     .select("*")
     .eq("slug", slug);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+export async function getPostByUuid(uuid: string) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("post")
+    .select("*")
+    .eq("id", uuid);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+export async function createPost() {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("post")
+    .insert({})
+    .select()
+    .single();
 
   if (error) {
     throw error;
